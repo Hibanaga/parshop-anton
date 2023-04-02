@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import variables from 'theme/styles/vars';
 
 export default styled.div`
-    max-width: 1200px;
+    max-width: 1196px;
     height: 100%;
     margin: 0 auto;
     width: 96%;

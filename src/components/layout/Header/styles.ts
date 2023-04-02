@@ -3,111 +3,96 @@ import styled from '@emotion/styled';
 import variables from 'theme/styles/vars';
 
 export default styled.header`
-    width: 100%;
-    box-shadow: 0 5px 35px 0 rgb(0 0 0 / 10%);
-    z-index: 10;
-    transition: height 0.3s ease-in-out;
-    background-color: #FFF;
-    padding: 1em 0 0 0;
-
     
-    .layout-container {
-        position: relative;
+    .inner {
+        display: flex;
+        align-items: center;
+        gap: 1.5em;
         
-        .inner-addtional {
-            height: 65%;
+        .inner-image {
+            position: relative;
+            width: 15%;
+            height: 6.5em;
+        }
+        
+        
+        .inner-searchbar {
+            width: 75%;
+        }
+        
+        
+        .inner-shopping-cart {
+            width: 10%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: 150ms height, 250ms transform;
-            padding-bottom: .5em;
-            border-bottom: .01em solid #eaeaea;
-
-            .headline {
+            
+            .icon-button {
+                border-radius: 50%;
                 position: relative;
-                font-size: 2.5em;
-                color: #36353a;
                 
-                .subheadline {
-                    display: block;
-                    font-size: .35em;
+                width: 2em;
+                height: 2em;
+                
+                &:hover {
+                    background-color: rgba(204, 204, 204, 0.4);
+                }
+                
+                .icon {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    font-size: .525em;
+                    transform: translate(-50%, -50%);
                 }
             }
             
-            
-
-            .inner-contact {
-                .headline-social {
-                    color: #000000;
-                    font-size: .925em;
-                    margin-bottom: .375em;
-                    font-weight: 400;
-                }
-                
-                
-                .inner-social {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .inner-image {
-                    position: relative;
-                    width: 2.5em;
-                    height: 2.5em;
-                    cursor: pointer;
-                    margin-right: 1em;
-                    
-                    &:last-of-type {
-                        margin-right: 0;
-                    }
-                    
-                    &:hover {
-                        opacity: .85;
-                    }
-                }
+            .data-total {
+                display: block;
+                margin-left: .5em;
+                font-weight: 300;
+                font-size: .825em;
+                white-space: nowrap;
             }
         }
-
-
-        .inner-navigation {
-            height: 3em;
+    }
+    
+    
+    .hero-navigation {
+        border-top: 0.01em solid rgba(232, 232, 232, 1);
+        border-top: 0.01em solid rgba(232, 232, 232, 1);
+        min-height: 3em;
+        height: 100%;
+        
+        .inner-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            height: 100%;
             
-            .inner-main {
+            .inner-navigation {
                 display: flex;
                 align-items: center;
                 height: 100%;
-
-                .list-item {
-                    height: 100%;
+                
+                .list-navigation {
                     display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    margin-right: 1em;
-
-                    &:hover {
-                        opacity: .85;
-                    }
-                }
-            }  
-            
-            .inner-navigation-button {
-                .button-telegram {
-                    .button {
-                        background-color: #2ca2de;
-                        color: #ffffff;
+                    height: 100%;
+                    background-color: red;
+                    
+                    .list-item {
+                        padding: 0 .5em;
+                        
+                        .data-value {
+                            padding: .5em;
+                            font-size: .925em;
+                        }
                     }
                 }
             }
         }
-        
     }
     
     @media all and (max-width: ${variables.tabletL}) {
-        .inner-contact {
-            display: none;
-        }
+        
     }
 `;

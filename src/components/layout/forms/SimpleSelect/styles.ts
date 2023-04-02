@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import variables from 'theme/styles/vars';
 
 export default styled.div`
-
     .multi-select-category__control {
         width: 20em;
         border: .15em solid #F3F3F3;

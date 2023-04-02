@@ -44,7 +44,7 @@ export default styled.div`
     }
 
     span {
-        font-weight: 600;
+        font-weight: 400;
         font-size: .925em;
         text-decoration: none;
         cursor: pointer;
@@ -112,8 +112,8 @@ export default styled.div`
     &.style-primary {
         &.variant-primary {
             .button {
-                background-color: #d32d46;
-                color: #FFF;
+                background-color: #FFF;
+                color: #777;
             }
 
             &:hover {

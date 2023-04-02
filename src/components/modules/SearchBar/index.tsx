@@ -1,8 +1,9 @@
 import Component from './component';
-import { CounterSizes } from './types';
+
+export interface Props {
+}
 
 Component.defaultProps = {
-    size: CounterSizes.medium,
 };
 
 export default Component;

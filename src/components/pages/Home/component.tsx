@@ -10,11 +10,10 @@ import Header from 'components/layout/Header';
 import { getStaticStaticProps } from './index';
 import StyledComponent from './styles';
 
-const PageHome: FunctionComponent<InferGetServerSidePropsType<typeof getStaticStaticProps>> = ({ categories }) => {
-
+const PageHome: FunctionComponent<InferGetServerSidePropsType<typeof getStaticStaticProps>> = ({  }) => {
     return (
         <StyledComponent className="page-home">
-
+            <Header />
         </StyledComponent>
     );
 };
