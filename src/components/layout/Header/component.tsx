@@ -73,6 +73,22 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                             </ul>
                         </div>
 
+                        <div className="inner-contact">
+                            <ul className="list-contact">
+                                {[
+                                    { label: 'СКИДКИ', value: 'Доставка и оплата' },
+                                    { label: 'МЫ В INSTAGRAM', value: 'Возврат' },
+                                ].map((element) => (
+                                    <li
+                                        key={element.value}
+                                        className="list-item"
+                                    >
+                                        <span className="data-value">{element.label}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
                     </div>
                 </Container>
             </div>

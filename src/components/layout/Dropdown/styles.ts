@@ -6,6 +6,13 @@ export default styled.div`
     position: relative;
     max-width: 15em;
     
+    &:hover {
+        .list-dropdown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
     .button-dropdown {
         &.style-primary.variant-primary {
             
@@ -30,6 +37,10 @@ export default styled.div`
         position: absolute;
         width: 100%;
         box-sizing: border-box;
+        transition: 150ms;
+        
+        opacity: 0;
+        transform: translateY(1em);
     }
     
     @media all and (max-width: ${variables.tabletL}) {
