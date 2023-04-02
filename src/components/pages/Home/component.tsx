@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { InferGetServerSidePropsType } from 'next';
 
 import Container from 'components/layout/Container';
+import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import SectionAbout from 'components/pages/Home/sections/About';
 import SectionHero from 'components/pages/Home/sections/Hero';
@@ -20,6 +21,8 @@ const PageHome: FunctionComponent<InferGetServerSidePropsType<typeof getStaticSt
                 <SectionPopular />
                 <SectionAbout />
             </Container>
+
+            <Footer />
         </StyledComponent>
     );
 };

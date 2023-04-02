@@ -18,7 +18,7 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
     const getProducts = async (category: string | null) => {
         const response = {
             //TODO: Replace with request after api works
-            elements: Array.from({ length: 12 }, (_, index) => (new Product({
+            elements: Array.from({ length: 6 }, (_, index) => (new Product({
                 id: index.toString(),
                 name: 'Костюм женский JUST BEAUTIFUL',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nisl nunc, blandit viverra luctus quis, cursus et neque. Sed imperdiet vestibulum tempus. Fusce nec malesuada sapien, id tempor mi. Phasellus commodo et nisi et condimentum. Proin quis hendrerit dolor, quis pulvinar lorem.',

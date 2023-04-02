@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import Container from 'components/layout/Container';
+import Dropdown from 'components/layout/Dropdown';
 import SearchBar from 'components/modules/SearchBar';
-
-import Dropdown from '../Dropdown';
 
 import { Props } from './index';
 import StyledComponent from './styles';
