@@ -8,7 +8,7 @@ export interface Props {
 Component.defaultProps = {
 };
 
-export const getStaticStaticProps: GetServerSideProps = async (context) => {
+export const getStaticStaticProps: GetServerSideProps = async () => {
     try {
         return {
             props: {},

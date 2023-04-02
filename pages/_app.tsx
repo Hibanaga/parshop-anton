@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Global } from '@emotion/core';
 import { AppContextProvider } from 'context/AppContext';
-import { motion } from 'framer-motion';
 
 import stylesBreakpoints from 'theme/styles/breakpoints';
 import stylesGlobal from 'theme/styles/global';
@@ -13,7 +12,6 @@ import AppWrapper from 'components/wrapper/AppWrapper';
 
 import 'theme/styles/globals.css';
 export default function App({ Component, pageProps }: AppProps) {
-
     return (
         <AppContextProvider>
             <>
