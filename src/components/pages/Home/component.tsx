@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { InferGetServerSidePropsType } from 'next';
 
-import { getItem } from 'utils/localStorage';
-
-import ButtonShoppingCart from 'components/layout/ButtonShoppingCart';
 import Container from 'components/layout/Container';
 import Header from 'components/layout/Header';
+import SectionAbout from 'components/pages/Home/sections/About';
+import SectionHero from 'components/pages/Home/sections/Hero';
+import SectionPopular from 'components/pages/Home/sections/Popular';
 
-import SectionHero from './sections/Hero';
 import { getStaticStaticProps } from './index';
 import StyledComponent from './styles';
 
@@ -18,6 +17,8 @@ const PageHome: FunctionComponent<InferGetServerSidePropsType<typeof getStaticSt
 
             <Container>
                 <SectionHero />
+                <SectionPopular />
+                <SectionAbout />
             </Container>
         </StyledComponent>
     );
