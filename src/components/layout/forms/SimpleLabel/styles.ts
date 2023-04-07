@@ -5,8 +5,6 @@ export default styled.div`
         width: 100%;
         color: #56646C;
         display: block;
-        margin-top: 1em;
-        margin-bottom: .25em;
         font-size: .875em;
         line-height: 1.25em;
     }

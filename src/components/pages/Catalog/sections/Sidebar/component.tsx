@@ -4,6 +4,8 @@ import Accordion from 'components/layout/Accordion';
 import LabelFilterContainer from 'components/layout/LabelFilterContainer';
 import RangeSlider from 'components/layout/RangeSlider';
 
+import SimpleCheckbox from '../../../../layout/forms/SimpleCheckbox';
+
 import { Props } from './index';
 import StyledComponent from './styles';
 
@@ -39,6 +41,25 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ }) => {
                     step={1}
                     value={rangeSelect}
                     onChange={(newValue) =>  setRangeSelect(newValue)}
+                />
+            </LabelFilterContainer>
+
+
+            <LabelFilterContainer headline="По размеру">
+                <SimpleCheckbox
+                    label="Men"
+                    isChecked={true}
+                    onChange={(isChecked) => console.log('aaa')}
+                />
+                <SimpleCheckbox
+                    label="Women"
+                    isChecked={true}
+                    onChange={(isChecked) => console.log('aaa')}
+                />
+                <SimpleCheckbox
+                    label="Children"
+                    isChecked={true}
+                    onChange={(isChecked) => console.log('aaa')}
                 />
             </LabelFilterContainer>
 
