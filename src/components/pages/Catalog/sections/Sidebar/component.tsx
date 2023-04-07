@@ -1,4 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
+import Routes from 'types/routes';
 
 import Accordion from 'components/layout/Accordion';
 import SimpleCheckbox from 'components/layout/forms/SimpleCheckbox';
@@ -9,7 +12,25 @@ import ColorizedFilterElement from 'components/modules/Catalog/ColorizedFilterEl
 import { Props } from './index';
 import StyledComponent from './styles';
 
+const tabs = [
+    { label: 'Gifts', value: 'gifts', options: [
+        { label: 'Водолазки', value: 'vodolazky' },
+        { label: 'Костюмы', value: 'Костюмы' },
+        { label: 'Свитшоты', value: 'Свитшоты' },
+        { label: 'Футболки', value:'Футболки' },
+    ] },
+    { label: 'Kids', value: 'kids', options: [
+        { label: 'Водолазки', value: 'Водолазки' },
+        { label: 'Костюмы', value: 'Костюмы' },
+        { label: 'Свитшоты', value: 'Свитшоты' },
+        { label: 'Футболки', value:'Футболки' },
+    ] },
+    { label: 'Men', value: 'men' },
+    { label: 'Women', value: 'women' },
+];
+
 const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeParams }) => {
+    const router = useRouter();
     const [filters, setFilters] = useState< { [key: string]: any }>({
         sizes: [],
         colors: [],
@@ -31,22 +52,17 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeP
     return (
         <StyledComponent className="page-catalog-section-side-bar">
             <LabelFilterContainer headline="Категории">
-                <Accordion sections={[
-                    { label: 'Gifts', value: [
-                        { label: 'Водолазки', value: 'Водолазки' },
-                        { label: 'Костюмы', value: 'Костюмы' },
-                        { label: 'Свитшоты', value: 'Свитшоты' },
-                        { label: 'Футболки', value:'Футболки' },
-                    ] },
-                    { label: 'Kids', value: [
-                        { label: 'Водолазки', value: 'Водолазки' },
-                        { label: 'Костюмы', value: 'Костюмы' },
-                        { label: 'Свитшоты', value: 'Свитшоты' },
-                        { label: 'Футболки', value:'Футболки' },
-                    ] },
-                    { label: 'Men', value: null },
-                    { label: 'Women', value: null },
-                ]}
+                <Accordion
+                    onElementClick={(globalKey, subKey) => {
+                        router.push(subKey ? {
+                            pathname: Routes.CatalogSubCategories,
+                            query: { globalSlug: globalKey, slug: subKey },
+                        } : {
+                            pathname: Routes.CatalogCategory,
+                            query: { slug: globalKey },
+                        });
+                    }}
+                    sections={tabs}
                 />
             </LabelFilterContainer>
 

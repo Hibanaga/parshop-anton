@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { convertObjectValues, invalidateFalsy } from 'utils/array';
+import { convertObjectValues } from 'utils/array';
 
 import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
@@ -69,7 +69,10 @@ const PageCatalog: FunctionComponent<Props> = ({ }) => {
                         />
                     </aside>
                     <main className="column-catalog">
-                        <SectionCatalog />
+                        <SectionCatalog
+                            params={params}
+                            onChangeParams={onChangeParams}
+                        />
                     </main>
                 </div>
             </Container>

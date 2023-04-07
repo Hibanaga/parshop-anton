@@ -4,7 +4,8 @@ import Component from './component';
 
 
 export interface Props {
-    sections: Option<string | Option<string>[] | null>[];
+    sections: {label: string, value: string, options?: Option<string>[]}[];
+    onElementClick?: (globalKey: string, subKey?: string) => void;
 }
 
 Component.defaultProps = {

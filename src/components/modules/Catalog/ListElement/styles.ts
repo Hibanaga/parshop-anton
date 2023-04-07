@@ -74,6 +74,7 @@ export default styled.div`
                 background-color: #000;
                 color: #FFF;
                 padding: .5em 1em;
+                cursor: pointer;
             }
             
             .icon {
