@@ -13,10 +13,10 @@ const ModuleSearchBar: FunctionComponent<Props>  = ({  }) => {
     return (
         <StyledComponent className="module-search-bar">
             <SimpleInput />
-            <SimpleSelect
-                placeholder="Выберите категорию"
-                options={[]}
-            />
+            {/*<SimpleSelect*/}
+            {/*    placeholder="Выберите категорию"*/}
+            {/*    options={[]}*/}
+            {/*/>*/}
 
             <button className="button-submit">
                 <FontAwesomeIcon

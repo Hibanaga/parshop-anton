@@ -6,14 +6,19 @@ export default styled.div`
     width: 100%;
     height: 100%;
     
+    .layout-form-simple-checkbox {
+        margin-bottom: .5em;
+    }
     
     .inner-amount {
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
         
         .inner-price {
             color: #717171;
+            margin-bottom: .375em;
             
             .data-label {
                 font-size: 1em;

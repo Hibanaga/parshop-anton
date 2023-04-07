@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { faBagShopping, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
@@ -8,13 +8,21 @@ import StyledComponent from './styles';
 
 const ModuleCatalogColorizedFilterElement: FunctionComponent<Props> = ({ color, label, value, count, active, onClick }) => {
     return (
-        <StyledComponent className={classNames(['module-catalog-colorized-list-element', { active }])}>
+        <StyledComponent
+            onClick={() => onClick && onClick(value)}
+            className={classNames(['module-catalog-colorized-list-element', { active }])}
+        >
             <div className="data-content">
                 {color && (
                     <div
                         className="data-color"
                         style={{ backgroundColor: color }}
-                    />
+                    >
+                        <FontAwesomeIcon
+                            className="icon"
+                            icon={faCheck}
+                        />
+                    </div>
                 )}
                 <span className="data-value">{label}</span>
                 {active && (

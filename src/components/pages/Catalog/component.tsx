@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { convertObjectValues } from 'utils/array';
+import { convertObjectValues, invalidateFalsy } from 'utils/array';
 
 import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
@@ -20,9 +20,16 @@ const getParams = (
     initialParams: any = {},
     overrideParams: any = {},
 ): any => {
+    //Get router params based on initialParams
+    const routerParams: Record<string, any> = {};
+    Object.keys(initialParams || {}).forEach(initialParamKey => {
+        if (routerQuery[initialParamKey]) {
+            routerParams[initialParamKey] = routerQuery[initialParamKey];
+        }
+    });
     return {
         ...(initialParams || {}),
-        ...routerQuery,
+        ...routerParams,
         ...(overrideParams || {}),
     };
 };
@@ -48,7 +55,6 @@ const PageCatalog: FunctionComponent<Props> = ({ }) => {
             },
         });
     };
-
 
     return (
         <StyledComponent className="page-home">

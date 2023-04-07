@@ -8,6 +8,24 @@ export default styled.li`
     justify-content: space-between;
     padding: .5em 0;
     cursor: pointer;
+    
+    &.active {
+        .inner-count {
+            background-color: #000;
+
+            .data-count {
+                color: #FFF;
+            }
+        }
+
+        .data-content {
+            .data-color {
+                .icon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
 
     .data-content {
         display: flex;
@@ -15,9 +33,19 @@ export default styled.li`
         position: relative;
 
         .data-color {
+            position: relative;
             width: 1.5em;
             height: 1.5em;
             border-radius: 50%;
+            
+            .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                color: #FFF;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+            }
         }
         .data-value {
             padding-left: .65em;
@@ -37,6 +65,14 @@ export default styled.li`
 
             .data-count {
                 color: #FFF;
+            }
+        }
+
+        .data-content {
+            .data-color {
+                .icon {
+                    opacity: 1;
+                }
             }
         }
     }

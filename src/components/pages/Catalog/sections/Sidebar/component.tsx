@@ -21,13 +21,12 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeP
         setFilters({
             ...filters,
             ...params,
-            sizes: Array.isArray(params?.sizes) ? params?.sizes : params?.sizes ? [params?.sizes] : [],
+            sizes: Array.isArray(params?.size) ? params?.size : params?.size ? [params?.size] : [],
+            colors:  Array.isArray(params?.color) ? params?.color : params?.color ? [params?.color] : [],
             min: params?.minPrice ?? 1,
             max: params?.maxPrice ?? 156,
         });
     }, [JSON.stringify(params)]);
-
-    console.log('filters.min: ', filters.min);
 
     return (
         <StyledComponent className="page-catalog-section-side-bar">
@@ -104,7 +103,7 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeP
 
                                 onChangeParams({
                                     ...params,
-                                    sizes: newValue,
+                                    size: newValue,
                                 });
 
                                 setFilters({ ...filters, sizes: newValue });
@@ -126,6 +125,18 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeP
                                 key={element.value}
                                 {...element}
                                 active={!!filters.colors.find((size: string) => size === element.value)}
+                                onClick={(newValue => {
+                                    const newFormattedValue = filters.colors.find((color: string) => color === newValue) ?
+                                        filters?.colors?.filter((color: string) => color !== newValue) :
+                                        [ ...filters.colors, newValue];
+
+                                    onChangeParams({
+                                        ...params,
+                                        color: newFormattedValue,
+                                    });
+
+                                    setFilters({ ...filters, colors: newFormattedValue });
+                                })}
                             />
                         ))
                     }
