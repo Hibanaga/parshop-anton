@@ -1,15 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 
 import Accordion from 'components/layout/Accordion';
+import SimpleCheckbox from 'components/layout/forms/SimpleCheckbox';
 import LabelFilterContainer from 'components/layout/LabelFilterContainer';
 import RangeSlider from 'components/layout/RangeSlider';
-
-import SimpleCheckbox from '../../../../layout/forms/SimpleCheckbox';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
-const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ }) => {
+const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ onChangeParams }) => {
     const [rangeSelect, setRangeSelect] = useState<[number, number]>([1, 156]);
 
     return (
@@ -63,6 +62,36 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ }) => {
                 />
             </LabelFilterContainer>
 
+            <LabelFilterContainer headline="По цвету">
+                <ul className="list-colors">
+                    {
+                        [
+                            { label: 'Бежевый', value:'Бежевый', color: '#f0e8c4', count: 2 },
+                            { label: 'Бордо', value:'Бордо', color: '#932020', count: 4 },
+                            { label: 'Голубой', value:'Голубой', color: '#45accc', count: 6 },
+                        ].map((element) => (
+                            <li
+                                key={element.value}
+                                className="list-item"
+                            >
+                                <div className="data-content">
+                                    {element?.color && (
+                                        <div
+                                            className="data-color"
+                                            style={{ backgroundColor: element.color }}
+                                        />
+                                    )}
+                                    <span className="data-value">{element.label}</span>
+                                </div>
+
+                                <div className="inner-count">
+                                    <span className="data-count">{element.count}</span>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </LabelFilterContainer>
 
         </StyledComponent>
     );

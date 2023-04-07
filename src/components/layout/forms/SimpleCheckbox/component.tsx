@@ -21,7 +21,7 @@ const LayoutFormSimpleCheckbox: FunctionComponent<Props> = ({ label, isChecked, 
                     checked={checked}
                     onChange={handleClick}
                 />
-                {label && <SimpleLabel label={label} />}
+                {label && <SimpleLabel  label={label} />}
             </div>
         </StyledComponent>
     );
