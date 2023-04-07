@@ -6,6 +6,42 @@ export default styled.div`
     width: 100%;
     height: 100%;
     
+    
+    .inner-amount {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        .inner-price {
+            color: #717171;
+            
+            .data-label {
+                font-size: 1em;
+                font-weight: 500;
+            }
+            .data-value {
+                font-size: 1em;
+                padding-left: .5em;
+                color: #2d2a2a;
+            }
+        }
+
+        .button-select-price {
+            padding: .5em 1em;
+            font-size: .925em;
+            border: none;
+            outline: none;
+            background-color: #0f0f0f;
+            color: #FFF;
+            cursor: pointer;
+            transition: 150ms;
+            
+            &:hover {
+                background-color: #da2f9a;
+            }
+        }
+    }
+    
     .layout-label-filter-container {
         padding-bottom: 2em;
         
@@ -19,56 +55,13 @@ export default styled.div`
     }
     
     .list-colors {
+        max-height: 12.5em;
+        padding: .25em .75em .25em 0;
+        overflow: hidden;
+        overflow-y: scroll;
+        
         .list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: .5em 0;
-            cursor: pointer;
             
-            .data-content {
-                display: flex;
-                align-items: center;
-                
-                .data-color {
-                    width: 1.5em;
-                    height: 1.5em;
-                    border-radius: 50%;
-                }
-                .data-value {
-                    padding-left: .65em;
-                }   
-            }
-            
-            &:hover {
-                .inner-count {
-                    background-color: #000;
-                    
-                    .data-count {
-                        color: #FFF;
-                    }
-                }
-            }
-            
-            .inner-count {
-                width: 1.5em;
-                height: 1em;
-                position: relative;
-                border: .01em solid #727272;
-                border-radius: .375em;
-                
-                display: flex;
-                justify-content: center;
-                
-                .data-count {
-                    color: #727272;
-                    font-size: .725em;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-            }
         }
     }
  

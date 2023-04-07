@@ -11,6 +11,7 @@ export default styled.div`
             padding-left: .25em;
             padding-top: .15em;
             font-size: 1em;
+            cursor: pointer;
         }
     }
     
@@ -22,6 +23,7 @@ export default styled.div`
         outline: none;
         border-radius: .375em;
         position: relative;
+        cursor: pointer;
     }
 
     .checkbox input[type="checkbox"]:checked::before {
@@ -32,6 +34,7 @@ export default styled.div`
         right: 2px;
         bottom: 2px;
         background-color: #2d2a2a;
+        cursor: pointer;
     }
 
     @media all and (max-width: ${variables.tabletS}) {

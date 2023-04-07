@@ -1,15 +1,33 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import Accordion from 'components/layout/Accordion';
 import SimpleCheckbox from 'components/layout/forms/SimpleCheckbox';
 import LabelFilterContainer from 'components/layout/LabelFilterContainer';
 import RangeSlider from 'components/layout/RangeSlider';
+import ColorizedFilterElement from 'components/modules/Catalog/ColorizedFilterElement';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
-const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ onChangeParams }) => {
-    const [rangeSelect, setRangeSelect] = useState<[number, number]>([1, 156]);
+const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ params, onChangeParams }) => {
+    const [filters, setFilters] = useState< { [key: string]: any }>({
+        sizes: [],
+        colors: [],
+        min: 1,
+        max: 156,
+    });
+
+    useEffect(() => {
+        setFilters({
+            ...filters,
+            ...params,
+            sizes: Array.isArray(params?.sizes) ? params?.sizes : params?.sizes ? [params?.sizes] : [],
+            min: params?.minPrice ?? 1,
+            max: params?.maxPrice ?? 156,
+        });
+    }, [JSON.stringify(params)]);
+
+    console.log('filters.min: ', filters.min);
 
     return (
         <StyledComponent className="page-catalog-section-side-bar">
@@ -38,56 +56,77 @@ const PageCatalogSectionSidebar: FunctionComponent<Props> = ({ onChangeParams })
                     min={1}
                     max={156}
                     step={1}
-                    value={rangeSelect}
-                    onChange={(newValue) =>  setRangeSelect(newValue)}
+                    value={[ filters.min, filters.max ]}
+                    onChange={(newValue) => {
+                        const [minPrice, maxPrice] = newValue;
+
+                        setFilters({
+                            ...filters,
+                            min: minPrice,
+                            max: maxPrice,
+                        });
+                    }}
                 />
+                <div className="inner-amount">
+                    <div className="inner-price">
+                        <span className="data-label">Цена:</span>
+                        <span className="data-value">{filters.min}BYN - {filters.max}BYN</span>
+                    </div>
+                    <button
+                        className="button-select-price"
+                        onClick={() => {
+                            onChangeParams({
+                                ...params,
+                                minPrice: filters.min,
+                                maxPrice: filters.max,
+                            });
+                        }}
+                    >
+                        Фильтровать
+                    </button>
+                </div>
             </LabelFilterContainer>
 
-
             <LabelFilterContainer headline="По размеру">
-                <SimpleCheckbox
-                    label="Men"
-                    isChecked={true}
-                    onChange={(isChecked) => console.log('aaa')}
-                />
-                <SimpleCheckbox
-                    label="Women"
-                    isChecked={true}
-                    onChange={(isChecked) => console.log('aaa')}
-                />
-                <SimpleCheckbox
-                    label="Children"
-                    isChecked={true}
-                    onChange={(isChecked) => console.log('aaa')}
-                />
+                {
+                    [
+                        { label: '116-122', value: '116-122' },
+                        { label: '128-134', value: '128-134' },
+                    ].map(({ label, value }) => (
+                        <SimpleCheckbox
+                            key={value}
+                            label={label}
+                            isChecked={!!filters.sizes.find((size: string) => size === value)}
+                            onChange={() => {
+                                const newValue = filters.sizes.find((size: string) => size === value) ?
+                                    filters?.sizes?.filter((element: string) => element !== value) :
+                                    [ ...filters.sizes, value];
+
+                                onChangeParams({
+                                    ...params,
+                                    sizes: newValue,
+                                });
+
+                                setFilters({ ...filters, sizes: newValue });
+                            }}
+                        />
+                    ))
+                }
             </LabelFilterContainer>
 
             <LabelFilterContainer headline="По цвету">
                 <ul className="list-colors">
                     {
                         [
-                            { label: 'Бежевый', value:'Бежевый', color: '#f0e8c4', count: 2 },
-                            { label: 'Бордо', value:'Бордо', color: '#932020', count: 4 },
-                            { label: 'Голубой', value:'Голубой', color: '#45accc', count: 6 },
+                            { label: 'Бежевый', value:'first', color: '#f0e8c4', count: 2 },
+                            { label: 'Бордо', value:'second', color: '#932020', count: 4 },
+                            { label: 'Голубой', value:'third', color: '#45accc', count: 6 },
                         ].map((element) => (
-                            <li
+                            <ColorizedFilterElement
                                 key={element.value}
-                                className="list-item"
-                            >
-                                <div className="data-content">
-                                    {element?.color && (
-                                        <div
-                                            className="data-color"
-                                            style={{ backgroundColor: element.color }}
-                                        />
-                                    )}
-                                    <span className="data-value">{element.label}</span>
-                                </div>
-
-                                <div className="inner-count">
-                                    <span className="data-count">{element.count}</span>
-                                </div>
-                            </li>
+                                {...element}
+                                active={!!filters.colors.find((size: string) => size === element.value)}
+                            />
                         ))
                     }
                 </ul>

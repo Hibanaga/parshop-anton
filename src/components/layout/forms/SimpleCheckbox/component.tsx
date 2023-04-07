@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import SimpleLabel from '../SimpleLabel';
 
@@ -7,6 +7,10 @@ import StyledComponent from './styles';
 
 const LayoutFormSimpleCheckbox: FunctionComponent<Props> = ({ label, isChecked, onChange }) => {
     const [checked, setChecked] = useState<boolean>(isChecked);
+
+    useEffect(()=> {
+        setChecked(isChecked);
+    }, [isChecked]);
 
     const handleClick = () => {
         setChecked(!checked);

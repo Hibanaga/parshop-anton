@@ -12,30 +12,17 @@ import SectionSidebar from './sections/Sidebar';
 import { Props } from './index';
 import StyledComponent from './styles';
 
-const initialParams = {
-    page: 1,
-    perPage: 12,
-    query: '',
-    sort: '',
-    missionType: '',
-};
+const initialParams = {};
+
 
 const getParams = (
     routerQuery: any,
-    initialParams = {},
-    overrideParams = {},
-) => {
-    //Get router params based on initialParams
-    const routerParams: Record<string, any> = {};
-    Object.keys(initialParams || {}).forEach(initialParamKey => {
-        if (routerQuery[initialParamKey]) {
-            routerParams[initialParamKey] = routerQuery[initialParamKey];
-        }
-    });
-
+    initialParams: any = {},
+    overrideParams: any = {},
+): any => {
     return {
         ...(initialParams || {}),
-        ...routerParams,
+        ...routerQuery,
         ...(overrideParams || {}),
     };
 };
@@ -43,7 +30,6 @@ const getParams = (
 const PageCatalog: FunctionComponent<Props> = ({ }) => {
     const router = useRouter();
     const initParams = getParams(router?.query, initialParams, {  });
-
     const [params, setParams] = useState(initParams);
 
     useEffect(() => {
@@ -51,7 +37,7 @@ const PageCatalog: FunctionComponent<Props> = ({ }) => {
             ...convertObjectValues(params),
             ...getParams(router?.query, initialParams),
         });
-    }, [JSON.stringify({ ...router?.query, tab: undefined })]);
+    }, [JSON.stringify({ ...router?.query })]);
 
     const onChangeParams = (nextParams: Record<string, any>) => {
         router.push({
@@ -71,12 +57,14 @@ const PageCatalog: FunctionComponent<Props> = ({ }) => {
             <Container>
                 <div className="columns">
                     <aside className="column-filter">
-                        <SectionSidebar onChangeParams={onChangeParams} />
+                        <SectionSidebar
+                            params={params}
+                            onChangeParams={onChangeParams}
+                        />
                     </aside>
                     <main className="column-catalog">
                         <SectionCatalog />
                     </main>
-
                 </div>
             </Container>
 
