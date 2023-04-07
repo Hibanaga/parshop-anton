@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import Container from 'components/layout/Container';
+import Dropdown from 'components/layout/Dropdown';
 import SearchBar from 'components/modules/SearchBar';
-
-import Dropdown from '../Dropdown';
 
 import { Props } from './index';
 import StyledComponent from './styles';
@@ -62,6 +61,22 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                                     { label: 'Возврат', value: 'Возврат' },
                                     { label: 'Отзывы', value: 'Отзывы' },
                                     { label: 'Контакты', value: 'Контакты' },
+                                ].map((element) => (
+                                    <li
+                                        key={element.value}
+                                        className="list-item"
+                                    >
+                                        <span className="data-value">{element.label}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="inner-contact">
+                            <ul className="list-contact">
+                                {[
+                                    { label: 'СКИДКИ', value: 'Доставка и оплата' },
+                                    { label: 'МЫ В INSTAGRAM', value: 'Возврат' },
                                 ].map((element) => (
                                     <li
                                         key={element.value}

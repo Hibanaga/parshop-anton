@@ -9,14 +9,6 @@ export interface OptionName<Value> {
     value: Value;
 }
 
-export interface PaginationParams {
-    page: number;
-    perPage?: number;
-    totalCount?: number;
+export enum Locales {
+    Ru = 'RU',
 }
-
-export interface ShoppingCartProps {
-    id: string;
-    quantity: number
-}
-

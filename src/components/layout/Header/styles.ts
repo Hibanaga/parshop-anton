@@ -59,8 +59,7 @@ export default styled.header`
     
     .hero-navigation {
         border-top: 0.01em solid rgba(232, 232, 232, 1);
-        border-top: 0.01em solid rgba(232, 232, 232, 1);
-        min-height: 3em;
+        border-bottom: 0.01em solid rgba(232, 232, 232, 1);
         height: 100%;
         
         .inner-row {
@@ -77,7 +76,6 @@ export default styled.header`
                 .list-navigation {
                     display: flex;
                     height: 100%;
-                    background-color: red;
                     
                     .list-item {
                         padding: 0 .5em;
@@ -85,6 +83,29 @@ export default styled.header`
                         .data-value {
                             padding: .5em;
                             font-size: .925em;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            
+            .inner-contact {
+                .list-contact {
+                    display: flex;
+                    height: 100%;
+
+                    .list-item {
+                        padding: 0 .5em;
+                        border-right: .01em solid #333;
+                        
+                        &:last-of-type {
+                            border-right: 0;
+                        }
+
+                        .data-value {
+                            padding: .5em;
+                            font-size: .725em;
+                            cursor: pointer;
                         }
                     }
                 }
