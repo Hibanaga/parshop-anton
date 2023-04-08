@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+
+import Routes from 'types/routes';
 
 import Container from 'components/layout/Container';
 import Dropdown from 'components/layout/Dropdown';
@@ -12,6 +15,8 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
+    const router = useRouter();
+
     return (
         <StyledComponent className={classNames(['layout-header'])}>
             <Container>
@@ -57,7 +62,7 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
 
                             <ul className="list-navigation">
                                 {[
-                                    { label: 'Доставка и оплата', value: 'Доставка и оплата' },
+                                    { label: 'Доставка и оплата', value: Routes.Delivery },
                                     { label: 'Возврат', value: 'Возврат' },
                                     { label: 'Отзывы', value: 'Отзывы' },
                                     { label: 'Контакты', value: 'Контакты' },
@@ -65,6 +70,7 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                                     <li
                                         key={element.value}
                                         className="list-item"
+                                        onClick={() => router.push(element.value)}
                                     >
                                         <span className="data-value">{element.label}</span>
                                     </li>
