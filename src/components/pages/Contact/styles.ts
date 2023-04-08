@@ -7,8 +7,7 @@ export default styled.div`
     .container-info {
         padding: 2em 0;
     }
-
-
+    
     .inner-image {
         min-height: 5em;
         position: relative;

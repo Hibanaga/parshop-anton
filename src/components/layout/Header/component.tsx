@@ -52,12 +52,20 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                     <div className="inner-row">
                         <div className="inner-navigation">
                             <Dropdown
-                                title="выберите категорию"
+                                title="Категории"
                                 options={[
-                                    { label: 'Option 1', value: 'option-1' },
-                                    { label: 'Option 2', value: 'option-2' },
-                                    { label: 'Option 3', value: 'option-3' },
+                                    { label: 'Gifts', value: 'gifts' },
+                                    { label: 'Kids', value: 'kids' },
+                                    { label: 'Men', value: 'men' },
+                                    { label: 'Women', value: 'women' },
                                 ]}
+                                onClick={(newValue) => {
+                                    router.push({
+                                        pathname: Routes.Catalog,
+                                        query: { slug: newValue.value },
+                                    });
+                                    console.log('newValue: ', newValue);
+                                }}
                             />
 
                             <ul className="list-navigation">
