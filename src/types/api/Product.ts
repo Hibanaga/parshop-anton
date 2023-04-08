@@ -12,5 +12,5 @@ export default interface Product {
     title?: string;
     description?: string;
     category?: string;
-    coverPhoto?: string;
+    imageUrl?: string;
 }

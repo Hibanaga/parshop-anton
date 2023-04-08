@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Props } from './index';
 import StyledComponent from './styles';
 
-const LayoutAccordion: FunctionComponent<Props> = ({ sections }) => {
+const LayoutAccordion: FunctionComponent<Props> = ({ sections, onElementClick }) => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     const toggleSection = (index: number) => {
@@ -13,14 +13,17 @@ const LayoutAccordion: FunctionComponent<Props> = ({ sections }) => {
 
     return (
         <StyledComponent className="layout-accordion">
-            {sections.map(({ label, value }, index) => (
+            {sections.map(({ label, value, options }, index) => (
                 <div
                     key={index}
                     className="accordion-section"
                 >
                     <button
                         className="accordion-button"
-                        onClick={() => toggleSection(index)}
+                        onClick={() => {
+                            toggleSection(index);
+                            !options && onElementClick && onElementClick(value);
+                        }}
                     >
                         {label}
                     </button>
@@ -30,16 +33,19 @@ const LayoutAccordion: FunctionComponent<Props> = ({ sections }) => {
                             { active: activeIndex === index },
                         ])}
                     >
-                        {value && Array.isArray(value) ? (
+                        {options && Array.isArray(options) && (
                             <ul>
-                                {value.map(({ label, value }) => (
+                                {options.map((element) => (
                                     <li
-                                        key={value}
+                                        key={element.value}
                                         className="list-item"
-                                    ><span className="data-value">{label}</span></li>
+                                        onClick={() => onElementClick && onElementClick(value, element.value)}
+                                    >
+                                        <span className="data-value">{element.label}</span>
+                                    </li>
                                 ))}
                             </ul>
-                        ) : <span className="data-value">{value}</span>}
+                        )}
                     </div>
                 </div>
             ))}

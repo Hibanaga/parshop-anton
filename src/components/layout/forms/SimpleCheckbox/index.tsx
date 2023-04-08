@@ -1,8 +1,9 @@
 import Component from './component';
 
 export interface Props {
-    params: { [key: string]: any }
-    onChangeParams: (newValue: Record<string, any>) => void;
+    label: string;
+    isChecked: boolean;
+    onChange: (isChecked: boolean) => void;
 }
 
 Component.defaultProps = {

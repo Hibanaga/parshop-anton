@@ -1,6 +1,9 @@
 enum Routes {
     Home = '/',
-    Product = '/product',
+    Delivery = '/delivery',
+    Catalog = '/catalog',
+    CatalogCategory = '/catalog/[slug]',
+    CatalogSubCategories = '/catalog/[globalSlug]/[slug]',
 }
 
 export default Routes;

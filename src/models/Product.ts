@@ -1,18 +1,14 @@
 import ApiProduct from 'types/api/Product';
-import { OptionName } from 'types/options';
 
 export default class Product {
     id: string;
     name?: string;
     description?: string;
     imageUrl?: string;
-    images?: string[];
     price?: number;
     category?: string;
 
-    fullDisplayName?: string;
     priceDisplay?: 0 | undefined | string;
-    categories?: OptionName<string>[];
     accesibility?: boolean;
     quantity?: number;
     totalPrice: number | undefined;
@@ -21,7 +17,7 @@ export default class Product {
         this.id = data.id;
         this.name = data.name && data.name;
         this.description = data?.description;
-        this.imageUrl = data?.coverPhoto;
+        this.imageUrl = data?.imageUrl;
         this.price = data.price && data.price;
         this.category =  data?.category;
 
@@ -36,8 +32,6 @@ export default class Product {
     }
 
     getFormattedPrice (price: number): string {
-        const formatter = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' });
-
-        return formatter.format(price);
+        return price + ' BYN';
     }
 }

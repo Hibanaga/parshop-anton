@@ -1,8 +1,9 @@
+import Product from 'models/Product';
+
 import Component from './component';
 
 export interface Props {
-    params: { [key: string]: any }
-    onChangeParams: (newValue: Record<string, any>) => void;
+    product: Product
 }
 
 Component.defaultProps = {

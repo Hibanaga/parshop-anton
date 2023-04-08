@@ -23,7 +23,7 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
                 name: 'Костюм женский JUST BEAUTIFUL',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nisl nunc, blandit viverra luctus quis, cursus et neque. Sed imperdiet vestibulum tempus. Fusce nec malesuada sapien, id tempor mi. Phasellus commodo et nisi et condimentum. Proin quis hendrerit dolor, quis pulvinar lorem.',
                 price: 15.32,
-                coverPhoto: 'https://parshop.by/wp-content/uploads/2023/03/128-2-800x800.jpg',
+                imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/128-2-800x800.jpg',
             }))),
         };
 

@@ -7,15 +7,17 @@ export default styled.div`
     .columns {
         display: flex;
         min-height: 15em;
+        margin-top: 2em;
         
         .column-filter {
             height: 100%;
-            width: 30%;
+            width: 25%;
             margin: .5em;
         }
+        
         .column-catalog {
             height: 100%;
-            width: 70%;
+            width: 75%;
             margin: .5em;
         }
     }
