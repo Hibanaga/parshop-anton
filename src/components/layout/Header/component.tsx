@@ -21,7 +21,12 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
         <StyledComponent className={classNames(['layout-header'])}>
             <Container>
                 <div className="inner">
-                    <div className="inner-image">
+                    <div
+                        className="inner-image"
+                        onClick={() => {
+                            router.push(Routes.Home);
+                        }}
+                    >
                         <Image
                             fill
                             objectFit="contain"
@@ -61,10 +66,9 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                                 ]}
                                 onClick={(newValue) => {
                                     router.push({
-                                        pathname: Routes.Catalog,
+                                        pathname: Routes.CatalogCategory,
                                         query: { slug: newValue.value },
                                     });
-                                    console.log('newValue: ', newValue);
                                 }}
                             />
 

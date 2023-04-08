@@ -1,18 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
 
-import Container from 'components/layout/Container';
+import Routes from 'types/routes';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
 const PageHomeSectionHero: FunctionComponent<Props>  = ({  }) => {
+    const router = useRouter();
+
     return (
         <StyledComponent className="page-home-section-hero">
             <div className="inner">
                 <div className="column-main">
-                    <div className={classNames(['inner-image', 'inner-main'])}>
+                    <div
+                        className={classNames(['inner-image', 'inner-main'])}
+                        onClick={()=> {
+                            router.push({
+                                pathname: Routes.CatalogCategory,
+                                query: { slug: 'women' },
+                            });
+                        }}
+                    >
                         <Image
                             fill
                             objectFit="cover"
@@ -31,7 +42,15 @@ const PageHomeSectionHero: FunctionComponent<Props>  = ({  }) => {
                 </div>
 
                 <div className="column-additional">
-                    <div className={classNames(['inner-image', 'inner-second'])}>
+                    <div
+                        className={classNames(['inner-image', 'inner-second'])}
+                        onClick={()=> {
+                            router.push({
+                                pathname: Routes.CatalogCategory,
+                                query: { slug: 'men' },
+                            });
+                        }}
+                    >
                         <Image
                             fill
                             objectFit="cover"
@@ -49,7 +68,15 @@ const PageHomeSectionHero: FunctionComponent<Props>  = ({  }) => {
                     </div>
 
                     <div className="inner-additional">
-                        <div className={classNames(['inner-image', 'inner-third'])}>
+                        <div
+                            className={classNames(['inner-image', 'inner-third'])}
+                            onClick={()=> {
+                                router.push({
+                                    pathname: Routes.CatalogCategory,
+                                    query: { slug: 'kids' },
+                                });
+                            }}
+                        >
                             <Image
                                 fill
                                 objectFit="cover"
@@ -66,7 +93,15 @@ const PageHomeSectionHero: FunctionComponent<Props>  = ({  }) => {
                             </div>
                         </div>
 
-                        <div className={classNames(['inner-image', 'inner-four'])}>
+                        <div
+                            className={classNames(['inner-image', 'inner-four'])}
+                            onClick={()=> {
+                                router.push({
+                                    pathname: Routes.CatalogCategory,
+                                    query: { slug: 'sale' },
+                                });
+                            }}
+                        >
                             <Image
                                 fill
                                 objectFit="cover"
