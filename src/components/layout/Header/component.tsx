@@ -63,9 +63,9 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                             <ul className="list-navigation">
                                 {[
                                     { label: 'Доставка и оплата', value: Routes.Delivery },
-                                    { label: 'Возврат', value: 'Возврат' },
-                                    { label: 'Отзывы', value: 'Отзывы' },
-                                    { label: 'Контакты', value: 'Контакты' },
+                                    { label: 'Возврат', value: Routes.Refund },
+                                    { label: 'Отзывы', value: Routes.Reviews },
+                                    { label: 'Контакты', value: Routes.Contact },
                                 ].map((element) => (
                                     <li
                                         key={element.value}
