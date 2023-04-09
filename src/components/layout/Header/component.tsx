@@ -1,11 +1,14 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { useAppContext } from 'context/AppContext';
 
 import Routes from 'types/routes';
+
+import { getItem } from 'utils/localStorage';
 
 import Container from 'components/layout/Container';
 import Dropdown from 'components/layout/Dropdown';
@@ -16,8 +19,21 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
+    const { shoppingCart, fetchShoppingCart } = useAppContext();
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
     const router = useRouter();
+
+    console.log('shoppingCart: ', shoppingCart);
+
+    useEffect(() => {
+        const products = getItem('shoppingCart');
+
+        if (shoppingCart?.length === 0 && products) {
+            fetchShoppingCart && fetchShoppingCart({});
+        }
+
+        console.log('products: ', products);
+    }, []);
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>

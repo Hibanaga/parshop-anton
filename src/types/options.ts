@@ -12,3 +12,9 @@ export interface OptionName<Value> {
 export enum Locales {
     Ru = 'RU',
 }
+
+export interface ShoppingCartProps {
+    id: string;
+    size: string;
+    quantity: number;
+}

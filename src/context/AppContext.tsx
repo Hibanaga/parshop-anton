@@ -11,27 +11,36 @@ const AppState = (): AppContextProps => {
     const [shoppingCart, setShoppingCart] = useState<Product[] | []>([]);
 
     const fetchShoppingCart = async (params: any) => {
-        console.log('params: ', params);
         //TODO: refactor where get access api
-        // const response = {
-        //     elements: Array.from(Array(100).keys()).map((id) => new Product({
-        //         id: id.toString(),
-        //         name: 'Костюм женский JUST BEAUTIFUL',
-        //         description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.',
-        //         price: 13 * id + 1,
-        //         imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/28-600x600.jpg',
-        //     })),
-        // };
-        //
-        //
-        // setShoppingCart(response.elements);
-        setShoppingCart([]);
+        const response = {
+            elements: Array.from(Array(100).keys()).map((id) => new Product({
+                id: id.toString(),
+                name: 'Костюм женский JUST BEAUTIFUL',
+                description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.',
+                price: 13 * id + 1,
+                imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/28-600x600.jpg',
+            })),
+        };
+
+
+        setShoppingCart(response.elements);
+        // setShoppingCart([]);
+    };
+
+    const handleAddShoppingCartElement = (product: Product) => {
+        setShoppingCart([...shoppingCart, product]);
+    };
+
+    const handleRemoveShoppingCartElement = (product: Product) => {
+        setShoppingCart(shoppingCart.filter((element) => element.id !== product.id));
     };
 
 
     return {
         shoppingCart,
         fetchShoppingCart,
+        onAddElement: handleAddShoppingCartElement,
+        onRemoveElement: handleRemoveShoppingCartElement,
     };
 };
 

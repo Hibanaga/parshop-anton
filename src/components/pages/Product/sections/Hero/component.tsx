@@ -2,6 +2,12 @@ import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import { ShoppingCartProps } from 'types/options';
+
+import Product from 'models/Product';
+
+import { getItem, setItem } from 'utils/localStorage';
+
 import Button from 'components/layout/Button';
 import Counter from 'components/layout/Counter';
 
@@ -11,6 +17,24 @@ import StyledComponent from './styles';
 const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
     const [counter, setCounter] = useState(1);
     const [size, setSize] = useState('');
+
+    const handleAddElementToShoppingCart = (product: Product) => {
+        const storageCart = getItem('shoppingCart');
+
+        let shoppingCart = null;
+        if (!storageCart) {
+            shoppingCart = [{ id: product.id, quantity: 1 }];
+        } else {
+            const parseStorageCart = JSON.parse(storageCart);
+
+            if (parseStorageCart.some(({ id }: {id: string}) => id === product.id )) {
+                shoppingCart = parseStorageCart.map((element: ShoppingCartProps) => element.id === product.id ? { id: element.id, quantity: element.quantity + 1 } : element);
+            } else {
+                shoppingCart = [ ...parseStorageCart, { id: product.id, quantity: 1 } ];
+            }
+        }
+        setItem('shoppingCart', JSON.stringify(shoppingCart));
+    };
 
     return (
         <StyledComponent className="page-product-section-hero">
