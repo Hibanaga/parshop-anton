@@ -1,6 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+
+import Routes from 'types/routes';
 
 import Product from 'models/Product';
 
@@ -8,6 +13,8 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
+    const router = useRouter();
+
     const [products, setProducts] = useState<Product[] | null>(null);
     const [category, setCategory] = useState<string | null>('women');
 
@@ -21,9 +28,11 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
             elements: Array.from({ length: 6 }, (_, index) => (new Product({
                 id: index.toString(),
                 name: 'Костюм женский JUST BEAUTIFUL',
+                slug: 'aa-bb-dd-ccc',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nisl nunc, blandit viverra luctus quis, cursus et neque. Sed imperdiet vestibulum tempus. Fusce nec malesuada sapien, id tempor mi. Phasellus commodo et nisi et condimentum. Proin quis hendrerit dolor, quis pulvinar lorem.',
                 price: 15.32,
                 imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/128-2-800x800.jpg',
+                hoverImageUrl: 'https://parshop.by/wp-content/uploads/2023/02/IMG_1740-600x600.jpg',
             }))),
         };
 
@@ -60,22 +69,50 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
                     <div
                         key={element.id}
                         className="popular-list-element"
+                        onClick={()=> {
+                            router.push({
+                                pathname: Routes.Product,
+                                query: { slug: element.id },
+                            });
+                        }}
                     >
 
-                        {element?.imageUrl && (
+                        <div className="button-show">
+                            <FontAwesomeIcon
+                                className="icon"
+                                icon={faMagnifyingGlass}
+                            />
+                        </div>
+
+                        {element?.imageUrl && element?.hoverImageUrl && (
                             <div className="inner-image">
-                                <Image
-                                    fill
-                                    objectFit="cover"
-                                    src={element?.imageUrl}
-                                    alt={element?.imageUrl}
-                                />
+                                <div className="cover-image">
+                                    <Image
+                                        fill
+                                        objectFit="cover"
+                                        src={element?.imageUrl}
+                                        alt={element?.imageUrl}
+                                    />
+                                </div>
+
+                                <div className="hover-image">
+                                    <Image
+                                        fill
+                                        objectFit="cover"
+                                        src={element?.hoverImageUrl}
+                                        alt={element?.hoverImageUrl}
+                                    />
+                                </div>
                             </div>
                         )}
 
+
                         <div className="inner-content">
                             <span className="data-name">{element.name}</span>
-                            <span className="data-price">{element.priceDisplay}</span>
+                            <div className="inner-scollable">
+                                <span className="data-price">{element.priceDisplay}</span>
+                                <span className="show-more">Выберите елемент</span>
+                            </div>
                         </div>
                     </div>
                 ))}

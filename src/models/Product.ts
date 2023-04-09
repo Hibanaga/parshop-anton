@@ -3,8 +3,11 @@ import ApiProduct from 'types/api/Product';
 export default class Product {
     id: string;
     name?: string;
+    slug?: string;
     description?: string;
     imageUrl?: string;
+    hoverImageUrl?: string;
+    images?: string[];
     price?: number;
     category?: string;
 
@@ -15,9 +18,12 @@ export default class Product {
 
     constructor(data: ApiProduct) {
         this.id = data.id;
+        this.slug = data.slug;
         this.name = data.name && data.name;
         this.description = data?.description;
         this.imageUrl = data?.imageUrl;
+        this.hoverImageUrl = data?.hoverImageUrl;
+        this.images = data?.images;
         this.price = data.price && data.price;
         this.category =  data?.category;
 

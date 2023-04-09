@@ -13,6 +13,7 @@ export default styled.header`
             position: relative;
             width: 15%;
             height: 6.5em;
+            cursor: pointer;
         }
         
         

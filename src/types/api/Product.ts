@@ -13,4 +13,6 @@ export default interface Product {
     description?: string;
     category?: string;
     imageUrl?: string;
+    hoverImageUrl?: string;
+    images?: string[];
 }

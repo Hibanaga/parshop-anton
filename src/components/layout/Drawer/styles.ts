@@ -5,8 +5,7 @@ import variables from 'theme/styles/vars';
 export default styled.div`
     color: #fff;
     background-color: #fff;
-    padding: .75em 1.5em;
-    border-top-left-radius: 16px;
+    //border-top-left-radius: 16px;
     flex-direction: column;
     display: flex;
     z-index: 50;
@@ -14,7 +13,7 @@ export default styled.div`
     bottom: 0;
     right: 0;
     width: 20em;
-    height: 90vh;
+    height: 100vh;
     box-shadow: 0 5px 35px 0 rgb(0 0 0 / 10%);
     transition: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;

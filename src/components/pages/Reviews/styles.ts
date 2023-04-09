@@ -14,18 +14,14 @@ export default styled.div`
     }
     
     .columns {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 1em;
+        margin: 2em 0;
         
-        .column {
-            padding: 5em 0;
-            
-            .data-value {
-                display: block;
-                color: #000000;
-                font-size: .825em;
-                line-height: 150%;
-            }
+        .column-image {
+            min-height: 22em;
+            position: relative;
         }
     }
 

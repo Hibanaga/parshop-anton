@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
@@ -10,18 +10,31 @@ import Routes from 'types/routes';
 import Container from 'components/layout/Container';
 import Dropdown from 'components/layout/Dropdown';
 import SearchBar from 'components/modules/SearchBar';
+import ShoppingCart from 'components/modules/ShoppingCart';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
     const router = useRouter();
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>
+            <ShoppingCart
+                isOpen={isOpenDrawer}
+                onOpen={()=> setIsOpenDrawer(true)}
+                onDrop={()=> setIsOpenDrawer(false)}
+            />
+
             <Container>
                 <div className="inner">
-                    <div className="inner-image">
+                    <div
+                        className="inner-image"
+                        onClick={() => {
+                            router.push(Routes.Home);
+                        }}
+                    >
                         <Image
                             fill
                             objectFit="contain"
@@ -34,8 +47,11 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                         <SearchBar />
                     </div>
 
-                    <div className="inner-shopping-cart">
-                        <div className="icon-button">
+                    <div className="inner-shopping-cart" >
+                        <div
+                            className="icon-button"
+                            onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                        >
                             <FontAwesomeIcon
                                 className="icon"
                                 icon={faBagShopping}
@@ -52,20 +68,27 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                     <div className="inner-row">
                         <div className="inner-navigation">
                             <Dropdown
-                                title="выберите категорию"
+                                title="Категории"
                                 options={[
-                                    { label: 'Option 1', value: 'option-1' },
-                                    { label: 'Option 2', value: 'option-2' },
-                                    { label: 'Option 3', value: 'option-3' },
+                                    { label: 'Gifts', value: 'gifts' },
+                                    { label: 'Kids', value: 'kids' },
+                                    { label: 'Men', value: 'men' },
+                                    { label: 'Women', value: 'women' },
                                 ]}
+                                onClick={(newValue) => {
+                                    router.push({
+                                        pathname: Routes.CatalogCategory,
+                                        query: { slug: newValue.value },
+                                    });
+                                }}
                             />
 
                             <ul className="list-navigation">
                                 {[
                                     { label: 'Доставка и оплата', value: Routes.Delivery },
-                                    { label: 'Возврат', value: 'Возврат' },
-                                    { label: 'Отзывы', value: 'Отзывы' },
-                                    { label: 'Контакты', value: 'Контакты' },
+                                    { label: 'Возврат', value: Routes.Refund },
+                                    { label: 'Отзывы', value: Routes.Reviews },
+                                    { label: 'Контакты', value: Routes.Contact },
                                 ].map((element) => (
                                     <li
                                         key={element.value}
