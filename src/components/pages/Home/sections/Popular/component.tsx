@@ -72,7 +72,7 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
                         onClick={()=> {
                             router.push({
                                 pathname: Routes.Product,
-                                query: { slug: element.slug },
+                                query: { slug: element.id },
                             });
                         }}
                     >

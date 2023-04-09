@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
@@ -10,15 +10,23 @@ import Routes from 'types/routes';
 import Container from 'components/layout/Container';
 import Dropdown from 'components/layout/Dropdown';
 import SearchBar from 'components/modules/SearchBar';
+import ShoppingCart from 'components/modules/ShoppingCart';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
     const router = useRouter();
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>
+            <ShoppingCart
+                isOpen={isOpenDrawer}
+                onOpen={()=> setIsOpenDrawer(true)}
+                onDrop={()=> setIsOpenDrawer(false)}
+            />
+
             <Container>
                 <div className="inner">
                     <div
@@ -39,8 +47,11 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                         <SearchBar />
                     </div>
 
-                    <div className="inner-shopping-cart">
-                        <div className="icon-button">
+                    <div className="inner-shopping-cart" >
+                        <div
+                            className="icon-button"
+                            onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                        >
                             <FontAwesomeIcon
                                 className="icon"
                                 icon={faBagShopping}
