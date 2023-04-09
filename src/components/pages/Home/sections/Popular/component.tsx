@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import Product from 'models/Product';
@@ -62,6 +64,13 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
                         className="popular-list-element"
                     >
 
+                        <div className="button-show">
+                            <FontAwesomeIcon
+                                className="icon"
+                                icon={faMagnifyingGlass}
+                            />
+                        </div>
+
                         {element?.imageUrl && (
                             <div className="inner-image">
                                 <Image
@@ -75,7 +84,10 @@ const PageHomeSectionPopular: FunctionComponent<Props>  = ({  }) => {
 
                         <div className="inner-content">
                             <span className="data-name">{element.name}</span>
-                            <span className="data-price">{element.priceDisplay}</span>
+                            <div className="inner-scollable">
+                                <span className="data-price">{element.priceDisplay}</span>
+                                <span className="show-more">Выберите елемент</span>
+                            </div>
                         </div>
                     </div>
                 ))}

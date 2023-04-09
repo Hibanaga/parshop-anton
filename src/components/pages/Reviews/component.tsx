@@ -15,7 +15,7 @@ const PageReviews: FunctionComponent<Props> = ({ }) => {
             <Header />
 
             <Container className="container-info">
-                <Banner headline="ВОЗВРАТ" />
+                <Banner headline="ОТЗЫВЫ" />
 
                 <div className="columns">
                     {
