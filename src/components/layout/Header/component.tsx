@@ -22,7 +22,7 @@ import StyledComponent from './styles';
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
     const router = useRouter();
     const [shoppingCartCounter, setShoppingCartCounter] = useState(0);
-    const { shoppingCart, fetchShoppingCart } = useAppContext();
+    const { shoppingCart, storageShoppingCart, fetchShoppingCart } = useAppContext();
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
     useEffect(() => {
@@ -34,14 +34,13 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
     }, []);
 
     useEffect(() => {
-        const shoppingCart = getItem('shoppingCart');
+        console.log('storageShoppingCart: ', storageShoppingCart);
 
-        if (shoppingCart) {
-            const parseShoppingCart = JSON.parse(shoppingCart);
-            const result = parseShoppingCart.reduce((prev: number, { quantity }: ShoppingCartProps) => prev +=quantity, 0);
+        if (storageShoppingCart) {
+            const result = storageShoppingCart.reduce((prev: number, { quantity }: ShoppingCartProps) => prev +=quantity, 0);
             setShoppingCartCounter(result);
         }
-    }, [JSON.stringify(getItem('shoppingCart'))]);
+    }, [storageShoppingCart]);
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>
@@ -76,7 +75,7 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                             className="icon-button"
                             onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                         >
-                            {shoppingCartCounter && (
+                            {!!shoppingCartCounter && (
                                 <div className="inner-counter">
                                     <span className="data-value">{shoppingCartCounter}</span>
                                 </div>

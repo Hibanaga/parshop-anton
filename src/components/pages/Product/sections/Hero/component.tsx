@@ -1,12 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
-
-import { ShoppingCartProps } from 'types/options';
+import { useAppContext } from 'context/AppContext';
 
 import Product from 'models/Product';
-
-import { getItem, setItem } from 'utils/localStorage';
 
 import Button from 'components/layout/Button';
 import Counter from 'components/layout/Counter';
@@ -15,26 +12,12 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
+    const { onAddElement } = useAppContext();
     const [counter, setCounter] = useState(1);
     const [size, setSize] = useState('');
 
     const handleAddElementToShoppingCart = (product: Product, quantity: number, size: string) => {
-        const storageCart = getItem('shoppingCart');
-
-        let shoppingCart = null;
-        if (!storageCart) {
-            shoppingCart = [{ id: product.id, size: size, quantity: quantity }];
-        } else {
-            const parseStorageCart = JSON.parse(storageCart);
-
-            if (parseStorageCart.some((element: { id: string, size: string }) => element.id === product.id && element.size === size )) {
-                shoppingCart = parseStorageCart.map((element: ShoppingCartProps) => element.id === product.id && element.size === size  ? { id: element.id, quantity: element.quantity + quantity, size } : element);
-            } else {
-                shoppingCart = [ ...parseStorageCart, { id: product.id, size: size, quantity: quantity } ];
-            }
-        }
-
-        setItem('shoppingCart', JSON.stringify(shoppingCart));
+        onAddElement && onAddElement(product, size, quantity);
     };
 
     return (
