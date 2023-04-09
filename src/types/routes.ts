@@ -1,5 +1,6 @@
 enum Routes {
     Home = '/',
+    Product = '/product/[slug]',
     Delivery = '/delivery',
     Refund = '/refund',
     Reviews = '/reviews',

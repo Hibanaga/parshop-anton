@@ -63,6 +63,25 @@ export default styled.div`
                     transform: translateX(0);
                     opacity: 1;
                 }
+
+                .inner-image {
+                    overflow: hidden;
+                    
+                    .cover-image {
+                        opacity: 0;
+
+                        img {
+                            transform: scale(1.1);
+                        }
+                    }
+                    .hover-image {
+                        opacity: 1;
+                        
+                        img {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
                 
                 .inner-content {
                     .inner-scollable {
@@ -106,6 +125,21 @@ export default styled.div`
                 position: relative;
                 width: 100%;
                 min-height: 24em;
+                overflow: hidden;
+
+                img {
+                    transition: 1000ms;
+                }
+                
+                .cover-image {
+                    opacity: 1;
+                    transition: 1000ms;
+                }
+                
+                .hover-image {
+                    opacity: 0;
+                    transition: 1000ms;
+                }
             }
 
             .inner-content {

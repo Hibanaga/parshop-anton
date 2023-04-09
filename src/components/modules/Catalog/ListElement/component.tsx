@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { getSenteces } from '../../../../utils/string';
+import { getSenteces } from 'utils/string';
 
 import { Props } from './index';
 import StyledComponent from './styles';
