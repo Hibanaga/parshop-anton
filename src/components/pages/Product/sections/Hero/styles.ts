@@ -54,16 +54,40 @@ export default styled.div`
                     margin-right: .75em;
                     background-color: #FFF;
                     box-shadow: inset 0 0 0 1px #ddd;
+                    cursor: pointer;
+                    
+                    &.active {
+                        background-color: #000;
+                        color: #FFF;
+                    }
                     
                     &:hover {
                         background-color: #000;
+                        color: #FFF;
                     }
                     
                     .data-value {
                        
                     }   
                 }
+            }
+            
+            .inner-actions {
+                margin-top: 1em;
+                display: flex;
                 
+                .layout-counter {
+                    max-width: 6em;
+                }
+                
+                .layout-button {
+                    margin-left: 1em;
+                
+                    .button {
+                        background-color: #0a0000;
+                        color: #FFF;   
+                    }
+                }
             }
         }
     }

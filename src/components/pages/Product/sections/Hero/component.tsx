@@ -1,10 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
+
+import Button from 'components/layout/Button';
+import Counter from 'components/layout/Counter';
 
 import { Props } from './index';
 import StyledComponent from './styles';
 
 const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
+    const [counter, setCounter] = useState(1);
+    const [size, setSize] = useState('');
+
     return (
         <StyledComponent className="page-product-section-hero">
             <div className="columns">
@@ -49,12 +56,13 @@ const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
                     <ul className="list-sizes">
                         {
                             [
-                                { label: 'M', value: 'm' },
+                                { label: 'S', value: 's' },
                                 { label: 'M', value: 'm' },
                             ].map(({ label, value }) => (
                                 <li
                                     key={value}
-                                    className="list-item"
+                                    className={classNames(['list-item', { active: size === value }])}
+                                    onClick={() => setSize(value)}
                                 >
                                     <span className="data-value">{label}</span>
                                 </li>
@@ -63,7 +71,14 @@ const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
                     </ul>
 
                     <div className="inner-actions">
+                        <Counter
+                            onChange={(newValue) => setCounter(newValue)}
+                            value={Number(counter)}
+                        />
 
+                        <Button onClick={() => console.log('aaa')}>
+                            В корзину
+                        </Button>
                     </div>
                 </div>
             </div>
