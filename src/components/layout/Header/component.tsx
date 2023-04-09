@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useAppContext } from 'context/AppContext';
 
+import { ShoppingCartProps } from 'types/options';
 import Routes from 'types/routes';
 
 import { getItem } from 'utils/localStorage';
@@ -19,11 +20,10 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
+    const router = useRouter();
+    const [shoppingCartCounter, setShoppingCartCounter] = useState(0);
     const { shoppingCart, fetchShoppingCart } = useAppContext();
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-    const router = useRouter();
-
-    console.log('shoppingCart: ', shoppingCart);
 
     useEffect(() => {
         const products = getItem('shoppingCart');
@@ -31,9 +31,17 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
         if (shoppingCart?.length === 0 && products) {
             fetchShoppingCart && fetchShoppingCart({});
         }
-
-        console.log('products: ', products);
     }, []);
+
+    useEffect(() => {
+        const shoppingCart = getItem('shoppingCart');
+
+        if (shoppingCart) {
+            const parseShoppingCart = JSON.parse(shoppingCart);
+            const result = parseShoppingCart.reduce((prev: number, { quantity }: ShoppingCartProps) => prev +=quantity, 0);
+            setShoppingCartCounter(result);
+        }
+    }, [JSON.stringify(getItem('shoppingCart'))]);
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>
@@ -68,6 +76,12 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                             className="icon-button"
                             onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                         >
+                            {shoppingCartCounter && (
+                                <div className="inner-counter">
+                                    <span className="data-value">{shoppingCartCounter}</span>
+                                </div>
+                            )}
+
                             <FontAwesomeIcon
                                 className="icon"
                                 icon={faBagShopping}

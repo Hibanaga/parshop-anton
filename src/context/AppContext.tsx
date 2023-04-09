@@ -1,6 +1,10 @@
 import { Context, createContext, FunctionComponent, ReactElement, useContext, useState } from 'react';
 
+import { ShoppingCartProps } from 'types/options';
+
 import Product from 'models/Product';
+
+import { getItem } from 'utils/localStorage';
 
 import { AppContextDefaults } from './AppContextDefault';
 import { AppContextProps } from './AppContextProps';
@@ -11,9 +15,12 @@ const AppState = (): AppContextProps => {
     const [shoppingCart, setShoppingCart] = useState<Product[] | []>([]);
 
     const fetchShoppingCart = async (params: any) => {
+        const shoppingCart = getItem('shoppingCart');
+        const parsedShoppingCart = JSON.parse(shoppingCart as string);
+
         //TODO: refactor where get access api
         const response = {
-            elements: Array.from(Array(100).keys()).map((id) => new Product({
+            elements: Array.from(Array(100).keys()).map((id) => ({
                 id: id.toString(),
                 name: 'Костюм женский JUST BEAUTIFUL',
                 description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.',
@@ -22,9 +29,12 @@ const AppState = (): AppContextProps => {
             })),
         };
 
+        const products = parsedShoppingCart.map((element: ShoppingCartProps) => {
+            const searchElement = response.elements.find((product) => product.id === element.id);
+            return new Product({ ...element, ...searchElement });
+        });
 
-        setShoppingCart(response.elements);
-        // setShoppingCart([]);
+        setShoppingCart(products);
     };
 
     const handleAddShoppingCartElement = (product: Product) => {

@@ -10,6 +10,7 @@ export default class Product {
     images?: string[];
     price?: number;
     category?: string;
+    size?: string;
 
     priceDisplay?: 0 | undefined | string;
     accesibility?: boolean;
@@ -26,6 +27,7 @@ export default class Product {
         this.images = data?.images;
         this.price = data.price && data.price;
         this.category =  data?.category;
+        this.size = data?.size;
 
         this.accesibility = data?.active ?? false;
         this.priceDisplay = data.price && this.getFormattedPrice(data.price ?? 0);

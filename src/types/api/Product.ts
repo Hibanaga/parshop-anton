@@ -15,4 +15,5 @@ export default interface Product {
     imageUrl?: string;
     hoverImageUrl?: string;
     images?: string[];
+    size?: string;
 }

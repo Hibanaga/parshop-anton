@@ -18,21 +18,22 @@ const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
     const [counter, setCounter] = useState(1);
     const [size, setSize] = useState('');
 
-    const handleAddElementToShoppingCart = (product: Product) => {
+    const handleAddElementToShoppingCart = (product: Product, quantity: number, size: string) => {
         const storageCart = getItem('shoppingCart');
 
         let shoppingCart = null;
         if (!storageCart) {
-            shoppingCart = [{ id: product.id, quantity: 1 }];
+            shoppingCart = [{ id: product.id, size: size, quantity: quantity }];
         } else {
             const parseStorageCart = JSON.parse(storageCart);
 
-            if (parseStorageCart.some(({ id }: {id: string}) => id === product.id )) {
-                shoppingCart = parseStorageCart.map((element: ShoppingCartProps) => element.id === product.id ? { id: element.id, quantity: element.quantity + 1 } : element);
+            if (parseStorageCart.some((element: { id: string, size: string }) => element.id === product.id && element.size === size )) {
+                shoppingCart = parseStorageCart.map((element: ShoppingCartProps) => element.id === product.id && element.size === size  ? { id: element.id, quantity: element.quantity + quantity, size } : element);
             } else {
-                shoppingCart = [ ...parseStorageCart, { id: product.id, quantity: 1 } ];
+                shoppingCart = [ ...parseStorageCart, { id: product.id, size: size, quantity: quantity } ];
             }
         }
+
         setItem('shoppingCart', JSON.stringify(shoppingCart));
     };
 
@@ -100,7 +101,7 @@ const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
                             value={Number(counter)}
                         />
 
-                        <Button onClick={() => console.log('aaa')}>
+                        <Button onClick={() => handleAddElementToShoppingCart(product, counter, size)}>
                             В корзину
                         </Button>
                     </div>
