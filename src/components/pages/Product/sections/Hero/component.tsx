@@ -1,6 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
+import { useAppContext } from 'context/AppContext';
+
+import Product from 'models/Product';
 
 import Button from 'components/layout/Button';
 import Counter from 'components/layout/Counter';
@@ -9,8 +12,13 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
+    const { onAddElement } = useAppContext();
     const [counter, setCounter] = useState(1);
     const [size, setSize] = useState('');
+
+    const handleAddElementToShoppingCart = (product: Product, quantity: number, size: string) => {
+        onAddElement && onAddElement(product, size, quantity);
+    };
 
     return (
         <StyledComponent className="page-product-section-hero">
@@ -76,7 +84,7 @@ const PageProductSectionHero: FunctionComponent<Props> = ({ product }) => {
                             value={Number(counter)}
                         />
 
-                        <Button onClick={() => console.log('aaa')}>
+                        <Button onClick={() => handleAddElementToShoppingCart(product, counter, size)}>
                             В корзину
                         </Button>
                     </div>

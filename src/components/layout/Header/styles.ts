@@ -34,6 +34,28 @@ export default styled.header`
                 width: 2em;
                 height: 2em;
                 
+                .inner-counter {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    z-index: 1;
+                    border-radius: 50%;
+                    width: 1em;
+                    height: 1em;
+                    background-color: #000;
+                    
+                    .data-value {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: .525em;
+                        padding-top: .225em;
+                        padding-left: .125em;
+                        color: #FFF;
+                    }
+                }
+                
                 &:hover {
                     background-color: rgba(204, 204, 204, 0.4);
                 }

@@ -1,11 +1,15 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { useAppContext } from 'context/AppContext';
 
+import { ShoppingCartProps } from 'types/options';
 import Routes from 'types/routes';
+
+import { getItem } from 'utils/localStorage';
 
 import Container from 'components/layout/Container';
 import Dropdown from 'components/layout/Dropdown';
@@ -16,8 +20,27 @@ import { Props } from './index';
 import StyledComponent from './styles';
 
 const LayoutHeader: FunctionComponent<Props> = ({  }) => {
-    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
     const router = useRouter();
+    const [shoppingCartCounter, setShoppingCartCounter] = useState(0);
+    const { shoppingCart, storageShoppingCart, fetchShoppingCart } = useAppContext();
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
+    useEffect(() => {
+        const products = getItem('shoppingCart');
+
+        if (shoppingCart?.length === 0 && products) {
+            fetchShoppingCart && fetchShoppingCart({});
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log('storageShoppingCart: ', storageShoppingCart);
+
+        if (storageShoppingCart) {
+            const result = storageShoppingCart.reduce((prev: number, { quantity }: ShoppingCartProps) => prev +=quantity, 0);
+            setShoppingCartCounter(result);
+        }
+    }, [storageShoppingCart]);
 
     return (
         <StyledComponent className={classNames(['layout-header'])}>
@@ -52,6 +75,12 @@ const LayoutHeader: FunctionComponent<Props> = ({  }) => {
                             className="icon-button"
                             onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                         >
+                            {!!shoppingCartCounter && (
+                                <div className="inner-counter">
+                                    <span className="data-value">{shoppingCartCounter}</span>
+                                </div>
+                            )}
+
                             <FontAwesomeIcon
                                 className="icon"
                                 icon={faBagShopping}

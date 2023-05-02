@@ -1,13 +1,16 @@
 export const single = async (query: string) => {
-    console.log('query: ', query);
-    const data = {
-        id: 'fc273802-d6ae-11ed-afa1-0242ac120002',
-        name: 'CSS: Animation Using CSS Transforms',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nisl nunc, blandit viverra luctus quis, cursus et neque. Sed imperdiet vestibulum tempus. Fusce nec malesuada sapien, id tempor mi. Phasellus commodo et nisi et condimentum. Proin quis hendrerit dolor, quis pulvinar lorem.',
-        price: 15.32,
-        imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/128-2-800x800.jpg',
-        images: ['https://parshop.by/wp-content/uploads/2023/03/128-2-800x800.jpg', 'https://parshop.by/wp-content/uploads/2023/03/ASAM9685-1-1000x480.jpg', 'https://parshop.by/wp-content/uploads/2022/10/Kids-666x570.jpg'],
+    const response = {
+        elements: Array.from(Array(100).keys()).map((id) => ({
+            id: id.toString(),
+            name: 'Костюм женский JUST BEAUTIFUL',
+            description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.',
+            price: 13 * id + 1,
+            imageUrl: 'https://parshop.by/wp-content/uploads/2023/03/28-600x600.jpg',
+            hoverImageUrl: 'https://parshop.by/wp-content/uploads/2023/02/IMG_1740-600x600.jpg',
+        })),
     };
 
-    return data;
+    const element = response.elements.filter((element) => element.id === query);
+
+    return element ? element[0] : {};
 };
